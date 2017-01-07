@@ -1,8 +1,9 @@
 {
-  "name": "example-node-server",
+  "name": "example-node-server-async-await-babel",
   "version": "1.1.0",
   "description": "Example Node Server w/ Babel & Async/Await",
   "main": "lib/index.js",
+  "repository": "git@github.com:nikolai3d/example-node-server-async-await-babel.git",
   "scripts": {
     "start": "nodemon lib/index.js --exec babel-node --presets es2015,stage-2",
     "build": "babel lib -d dist",

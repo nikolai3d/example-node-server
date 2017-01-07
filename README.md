@@ -25,14 +25,6 @@ Along with some [presets](http://babeljs.io/docs/plugins/#presets).
 $ npm install --save-dev babel-preset-es2015 babel-preset-stage-2
 ```
 
-Then, in order to make `async/await` (ES7) constructs work, we add ''
-
-```shell
-$ npm install --save-dev babel-polyfill
-```
-
-*Note: In order for async/await to work properly, your entry file (e.g. index.js or main.js or w/e) should have `import 'babel-polyfill';` as its first line*
-
 Then create our server in `index.js`.
 
 ```shell
