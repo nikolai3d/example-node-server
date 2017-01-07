@@ -1,4 +1,4 @@
-# Example Node Server w/ Babel
+# Example Node Server w/ Babel (also enabling ES7 async/wait pattern)
 
 ### Getting Started
 
@@ -244,6 +244,14 @@ Server running at http://127.0.0.1:1337/
 That's it!
 
 ## Adding async/await support
+
+### What is Async/Await?
+
+Basically, `await` takes a promise, waits for it's value to be available, and then returns that value. Here are some detailed primers on using the `async` & `await` patterns:
+  * http://rossboucher.com/await/#/10
+  * https://ponyfoo.com/articles/understanding-javascript-async-await
+
+### Setting it up with Babel
 
 Main Reference for most of these instructions is: http://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined-with-async-await
 
