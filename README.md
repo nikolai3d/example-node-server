@@ -34,7 +34,6 @@ Then create our server in `index.js`.
 $ touch index.js
 ```
 ```js
-import 'babel-polyfill';
 import http from 'http';
 
 http.createServer((req, res) => {
