@@ -11,3 +11,14 @@ describe('Example Node Server', () => {
     });
   });
 });
+
+import {test_result} from '../lib/asyncawait';
+
+describe('Test Example Async', () => {
+  it ('should resolve with true', done => {
+    test_result().then( res => {
+      assert.equal(true, res);
+      done();
+    })
+  })
+});

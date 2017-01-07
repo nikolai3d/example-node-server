@@ -2,6 +2,17 @@
 
 ### Getting Started
 
+#### Setup your shell to run package-local commands
+
+After installing all the dependencies, the result binaries will be placed in the `./node_modules/.bin/` folder. In order to run those to in a command line, append the following line to your `~/.bash_profile` file:
+```
+export PATH=./node_modules/.bin/:$PATH
+```
+
+#### Initial installation
+
+*(These steps are just for reference, the checked-in `package.json` file should already contain all the dependencies)*
+
 First we'll install `babel-cli`.
 
 ```shell
@@ -14,12 +25,21 @@ Along with some [presets](http://babeljs.io/docs/plugins/#presets).
 $ npm install --save-dev babel-preset-es2015 babel-preset-stage-2
 ```
 
+Then, in order to make `async/await` (ES7) constructs work, we add ''
+
+```shell
+$ npm install --save-dev babel-polyfill
+```
+
+*Note: In order for async/await to work properly, your entry file (e.g. index.js or main.js or w/e) should have `import 'babel-polyfill';` as its first line*
+
 Then create our server in `index.js`.
 
 ```shell
 $ touch index.js
 ```
 ```js
+import 'babel-polyfill';
 import http from 'http';
 
 http.createServer((req, res) => {
@@ -227,3 +247,65 @@ Server running at http://127.0.0.1:1337/
 ```
 
 That's it!
+
+## Adding async/await support
+
+Main Reference for most of these instructions is: http://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined-with-async-await
+
+
+In order to make `async/await` (ES7) constructs work, we add ''
+
+```shell
+$ npm install --save-dev babel-polyfill
+```
+
+Now let's create an extra file with some functions that are using the async/await pattern:
+```shell
+$ touch lib/asyncawait.js
+```
+```js
+async function test() {
+  return new Promise((resolve, reject) => {
+    resolve(true);
+  })
+}
+
+async function test_result() {
+  const result = await test();
+  return result;
+}
+
+export { test_result };
+```
+
+In order for async/await to work properly, your entry file (e.g. index.js or main.js or w/e) should have `import 'babel-polyfill';` as its first line, so with our next step we add this as a first line to `lib/index.js`:
+
+```js
+import 'babel-polyfill';
+```
+
+Then add a call to test_result(). Remember, an `async` function always returns a promise, so in the main code we need to treat its result as such:
+
+```js
+import {test_result} from './asyncawait';
+
+test_result().then((arg) => {
+  console.log("Then:", arg);
+});
+```
+
+### Adding async/await test
+
+In our main mocha file, `test/index.js`, add the following test suite:
+```js
+import {test_result} from '../lib/asyncawait';
+
+describe('Test Example Async', () => {
+  it ('should resolve with true', done => {
+    test_result().then( res => {
+      assert.equal(true, res);
+      done();
+    })
+  })
+});
+```
