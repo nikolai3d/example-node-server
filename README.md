@@ -4,10 +4,13 @@
 
 #### Setup your shell to run package-local commands
 
-After installing all the dependencies, the result binaries will be placed in the `./node_modules/.bin/` folder. In order to run those to in a command line, append the following line to your `~/.bash_profile` file:
+To ensure that we’re not messing up the environment of any other projects using Babel, all the dependencies in this example are installed *locally*. After all the installations are done, the result binaries will be placed in the `./node_modules/.bin/` folder of your package. 
+In order to run those to in a command line, append the following line to your `~/.bash_profile` file:
 ```
 export PATH=./node_modules/.bin/:$PATH
 ```
+
+After that, either restart your bash or update its environment by typing `$ . ~/.bash_profile`
 
 #### Initial installation
 
