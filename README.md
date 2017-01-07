@@ -253,7 +253,7 @@ That's it!
 Main Reference for most of these instructions is: http://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined-with-async-await
 
 
-In order to make `async/await` (ES7) constructs work, we add ''
+In order to make `async/await` (ES7) constructs work, we need to add the `babel-polyfill`(https://babeljs.io/docs/usage/polyfill/) module:
 
 ```shell
 $ npm install --save-dev babel-polyfill
@@ -292,6 +292,12 @@ import {test_result} from './asyncawait';
 test_result().then((arg) => {
   console.log("Then:", arg);
 });
+```
+
+If you now run the index.js file (whether via babel-node or transpiled `dist/index.js` file, the "Then: true" line should print at the end of its output:
+```
+Server running at http://127.0.0.1:1337/
+Then: true
 ```
 
 ### Adding async/await test
